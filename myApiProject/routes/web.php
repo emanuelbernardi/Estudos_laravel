@@ -35,3 +35,6 @@ Route::put('/Clients/{id}', [ClientController::class, 'update'])->name('clients.
 Route::delete('/Clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
 
 
+Route::resource('Clients', ClientController::class);
+
+
