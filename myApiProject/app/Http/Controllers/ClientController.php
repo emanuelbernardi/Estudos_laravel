@@ -9,6 +9,11 @@ use Illuminate\View\View;
 
 class ClientController extends Controller
 {
+    /**
+     * @return View
+     * está view retorna a lista de clientes
+     * 
+     */
     public function index(): View
     {
         
@@ -19,6 +24,11 @@ class ClientController extends Controller
         ]);
     }
 
+    /**
+     * @return View
+     * este método retorna um view com os detalhes sobre o Clientes
+     * 
+     */
     public function show(int $id): View
     {
          $client = Client::find($id);
@@ -28,11 +38,22 @@ class ClientController extends Controller
         ]);    
     }
 
+    /**
+     * Retorna um view com um formulario para a criação de clientes
+     * @return View
+     */
     public function create(): View
     {
         return view('clients.create');
     }
 
+    /**
+     * este método pega os dados passados nos formulario e adiciona como um novo cliente
+     * no banco de dados 
+     *após isso ele redireciona para a pagina de clientes
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request): RedirectResponse
     {
         $dados = $request->except('_token');
@@ -42,6 +63,12 @@ class ClientController extends Controller
         return redirect('/Clients');
     }
 
+    /**
+     *este método acha o id do cliente escolhido 
+     *e retorna ele para uma view para edição das infos do cliente 
+     * @param integer $id
+     * @return View
+     */
     public function edit(int $id): View
     {
         $client = Client::find($id);
@@ -52,6 +79,14 @@ class ClientController extends Controller
 
     }
 
+    /**
+     * 
+     * Neste método é pego a alteração dos dados e atualizado no banco
+     *após isso ele redireciona para a pagina de clientes
+     * @param integer $id
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function update(int $id, Request $request): RedirectResponse
     {
         $client = Client::find($id);
@@ -66,6 +101,12 @@ class ClientController extends Controller
 
     }
 
+    /**
+     * neste método é achado e deleletado o registro do cliente no banco
+     *após isso ele redireciona para a pagina de clientes
+     * @param integer $id
+     * @return RedirectResponse
+     */
     public function destroy(int $id): RedirectResponse
     {
         $client = Client::find($id);
