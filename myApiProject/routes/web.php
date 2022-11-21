@@ -22,18 +22,23 @@ Route::get('/hi', function () {
 Route::get('/', [myRoutes::class, 'index'])->name('index');
 Route::get('/cliente/{id}', [myRoutes::class, 'cliente']);
 
-Route::get('/Clients', [ClientController::class, 'index'])->name('clients.index');
+Route::controller(ClientController::class)->group(function () {
 
-Route::get('/Clients/create', [ClientController::class, 'create'])->name('clients.create');
+Route::get('/Clients', 'index')->name('clients.index');
 
-Route::get('/Clients/{id}', [ClientController::class, 'show'])->name('clients.show');
+Route::get('/Clients/create', 'create')->name('clients.create');
 
-Route::post('/Clients', [ClientController::class, 'store'])->name('clients.store');
+Route::get('/Clients/{id}', 'show')->name('clients.show');
 
-Route::get('/Clients/{id}/edit', [ClientController::class, 'edit'])->name('clients.edit');
-Route::put('/Clients/{id}', [ClientController::class, 'update'])->name('clients.update');
-Route::delete('/Clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+Route::post('/Clients', 'store')->name('clients.store');
 
+Route::get('/Clients/{id}/edit', 'edit')->name('clients.edit');
+
+Route::put('/Clients/{id}', 'update')->name('clients.update');
+
+Route::delete('/Clients/{id}', 'destroy')->name('clients.destroy');
+
+});
 
 
 
